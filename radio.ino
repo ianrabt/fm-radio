@@ -9,14 +9,13 @@
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 // define some values used by the panel and buttons
-int lcd_key     = 0;
-int adc_key_in  = 0;
+keys_t lcd_key = NONE;
 enum keys_t {RIGHT, UP, DOWN, LEFT, SELECT, NONE};
 
 // read the buttons
 keys_t read_LCD_buttons()
 {
-	adc_key_in = analogRead(0);      // read the value from the sensor 
+	int adc_key_in = analogRead(0);      // read the value from the sensor 
 	// my buttons when read are centered at these valies: 0, 144, 329, 504, 741
 	// we add approx 50 to those values and check to see if we are close
 	if (adc_key_in > 1000) return NONE; // We make this the 1st option for speed reasons since it will be the most likely result
@@ -42,6 +41,7 @@ keys_t read_LCD_buttons()
 
 void setup()
 {
+	//Wire.begin();
 	lcd.begin(16, 2);              // start the library
 	lcd.setCursor(0,0);
 	lcd.print("FM Radio: 000.00"); // print a simple message
@@ -57,22 +57,22 @@ void loop()
 	lcd_key = read_LCD_buttons();  // read the buttons
 
 	switch (lcd_key) {             // depending on which button was pushed, we perform an action
-	case btnRIGHT:
+	case RIGHT:
 		lcd.print("RIGHT ");
 		break;
-	case btnLEFT:
+	case LEFT:
 		lcd.print("LEFT   ");
 		break;
-	case btnUP:
+	case UP:
 		lcd.print("UP    ");
 		break;
-	case btnDOWN:
+	case DOWN:
 		lcd.print("DOWN  ");
 		break;
-	case btnSELECT:
+	case SELECT:
 		lcd.print("SELECT");
 		break;
-	case btnNONE:
+	case NONE:
 		lcd.print("NONE  ");
 		break;
 	}
