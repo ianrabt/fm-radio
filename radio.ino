@@ -1,5 +1,6 @@
 #include <LiquidCrystal.h>
 #include <Wire.h>
+#include "types.h"
 
 /*******************************************************
 
@@ -10,7 +11,6 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 // define some values used by the panel and buttons
 keys_t lcd_key = NONE;
-enum keys_t {RIGHT, UP, DOWN, LEFT, SELECT, NONE};
 
 // read the buttons
 keys_t read_LCD_buttons()
